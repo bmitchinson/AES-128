@@ -1,3 +1,6 @@
+from FField import FField
+
+
 def hexStrToInt(str):
     return int(str, 16)
 
@@ -13,3 +16,7 @@ def xorHexStr(one, two):
     res = oneInt ^ twoInt
     hexRes = "{0:#0{1}x}".format(res, len(one) + 2)[2:]
     return hexRes
+
+
+def addRoundKey(state, roundKey):
+    return FField(xorHexStr(state.getStateAsStr(), roundKey))

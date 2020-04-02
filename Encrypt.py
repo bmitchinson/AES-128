@@ -4,7 +4,7 @@ from sBox import sBox
 
 # from shiftRows import shiftRows
 # from mixColumns import mixColumns
-from util import xorHexStr
+from util import xorHexStr, addRoundKey
 
 
 class Encrypt:
@@ -32,7 +32,10 @@ class Encrypt:
             )
             print("state:")
             self.state.printStateAsGrid()
-        self.state = FField(xorHexStr(self.state.getStateAsStr(), roundKeys[0]))
+
+        self.state = addRoundKey(self.state, roundKeys[self.currentRound])
+        self.currentRound += 1
+
         if self.printStateChanges:
             print("state:")
             self.state.printStateAsGrid()
@@ -42,7 +45,7 @@ class Encrypt:
         #   self.state = shiftRows(self.state)
         #   self.state = mixColumns(self.state)
         #   self.state = addRoundKey(self.state, self.roundKeys[self.currentRound])
-        #   self.currentRound++
+        #   self.currentRound+=1
 
         # self.state = subBytes(self.state)
         # self.state = shiftRows(self.state)
