@@ -7,24 +7,20 @@ class FField:
             [initState[6:8], initState[14:16], initState[22:24], initState[30:]],
         ]
 
-    def printStateArrayAsGrid(self):
+    def printStateAsGrid(self):
         s = self.state
         print(
             f"[{s[0][0]}][{s[0][1]}][{s[0][2]}][{s[0][3]}]\n"
             + f"[{s[1][0]}][{s[1][1]}][{s[1][2]}][{s[1][3]}]\n"
             + f"[{s[2][0]}][{s[2][1]}][{s[2][2]}][{s[2][3]}]\n"
-            + f"[{s[3][0]}][{s[3][1]}][{s[3][2]}][{s[3][3]}]"
+            + f"[{s[3][0]}][{s[3][1]}][{s[3][2]}][{s[3][3]}]\n"
         )
 
-    def getStateArrayAsGridStr(self):
+    def getStateAsStr(self):
         s = self.state
-        con = self.byte2ele
         return (
-            f"{con(s[0][0])}{con(s[0][1])}{con(s[0][2])}{con(s[0][3])}"
-            + f"{con(s[1][0])}{con(s[1][1])}{con(s[1][2])}{con(s[1][3])}"
-            + f"{con(s[2][0])}{con(s[2][1])}{con(s[2][2])}{con(s[2][3])}"
-            + f"{con(s[3][0])}{con(s[3][1])}{con(s[3][2])}{con(s[3][3])}"
+            f"{s[0][0]}{s[1][0]}{s[2][0]}{s[3][0]}"
+            + f"{s[0][1]}{s[1][1]}{s[2][1]}{s[3][1]}"
+            + f"{s[0][2]}{s[1][2]}{s[2][2]}{s[3][2]}"
+            + f"{s[0][3]}{s[1][3]}{s[2][3]}{s[3][3]}"
         )
-
-    def byte2ele(self, ele):
-        return ele[0]

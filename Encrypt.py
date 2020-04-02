@@ -1,32 +1,49 @@
-import FField from FField
-import keyExpansion from keyExpansion
-import subBytes from subBytes
-import shiftRows from shiftRows
-import mixColumns from mixColumns
-import addRoundKey from addRoundKey
+from FField import FField
+from keyExpansion import keyExpansion
+from sBox import sBox
 
-class Encrypt():
-  def __init__(self, plainTxt, key):
-    self.plainTxt = plainTxt
-    self.key = key
-    self.state = FField(plainTxt)
-    self.printStateChanges = True
-    self.currentRound = 0
-    self.roundKeys = []
+# from shiftRows import shiftRows
+# from mixColumns import mixColumns
+from util import xorHexStr
 
-  def go(self):
-    self.roundKeys = keyExpansion(key)
-    addRoundKey(self.state, self.roundKeys[self.currentRound])
-    
-    # while (self.currentRound < 10):
-    #   self.state = subBytes(self.state)
-    #   self.state = shiftRows(self.state)
-    #   self.state = mixColumns(self.state)
-    #   self.state = addRoundKey(self.state, self.roundKeys[self.currentRound])
-    #   self.currentRound++
-    
-    # self.state = subBytes(self.state)
-    # self.state = shiftRows(self.state)
-    # self.state = addRoundKey(self.state, self.roundKeys[self.currentRound])
 
-    return self.state
+class Encrypt:
+    def __init__(self, plainTxt, key, printStateChanges):
+        self.plainTxt = plainTxt
+        self.key = key
+        self.state = FField(plainTxt)
+        self.printStateChanges = printStateChanges
+        self.currentRound = 0
+        self.roundKeys = []
+        print(
+            "***********************************************\n"
+            + f"Encrypting: {plainTxt}\n"
+            + f"Using Key : {key}\n"
+            + "***********************************************"
+        )
+        self.go()
+
+    def go(self):
+        roundKeys = keyExpansion(self.key)
+        if self.printStateChanges:
+            print(
+                f"round: {self.currentRound}\n"
+                + "***********************************************"
+            )
+            print("state:")
+            self.state.printStateAsGrid()
+        self.state = FField(xorHexStr(self.state.getStateAsStr(), roundKeys[0]))
+        if self.printStateChanges:
+            print("state:")
+            self.state.printStateAsGrid()
+
+        # while (self.currentRound < 10):
+        #   self.state = subBytes(self.state)
+        #   self.state = shiftRows(self.state)
+        #   self.state = mixColumns(self.state)
+        #   self.state = addRoundKey(self.state, self.roundKeys[self.currentRound])
+        #   self.currentRound++
+
+        # self.state = subBytes(self.state)
+        # self.state = shiftRows(self.state)
+        # self.state = addRoundKey(self.state, self.roundKeys[self.currentRound])
