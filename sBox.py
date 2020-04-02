@@ -523,6 +523,7 @@ def sBox(input):
     lookupResultInt = sBoxTable[hexStrToInt(input)]
     return "{0:#0{1}x}".format(lookupResultInt, 4)[2:]
 
+
 def invSBox(input):
     lookupResultInt = sBoxInvTable[hexStrToInt(input)]
     return "{0:#0{1}x}".format(lookupResultInt, 4)[2:]

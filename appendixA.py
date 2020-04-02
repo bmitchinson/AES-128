@@ -3,11 +3,13 @@ from keyExpansion import keyExpansion
 
 def appendixA():
     passing = True
-    print("\n***********************************************\n" +
-          "Generating 11 roundKeys through keyExpansion.py\n\n" + 
-          "Each will be compared to the roundKey generated\n" + 
-          "in AppendixA of FIPS 197 for validation.        \n" +
-          "***********************************************\n")
+    print(
+        "\n***********************************************\n"
+        + "Generating 11 roundKeys through keyExpansion.py\n\n"
+        + "Each will be compared to the roundKey generated\n"
+        + "in AppendixA of FIPS 197 for validation.        \n"
+        + "***********************************************\n"
+    )
     cipherKey = "2b7e151628aed2a6abf7158809cf4f3c"
     roundKeys = keyExpansion(cipherKey)
     appendixAKeys = [
@@ -34,9 +36,12 @@ def appendixA():
             passing = False
         i += 1
 
-    print("\n***********************************************\n" +
-         f"Appendix A Complete Match (Tests Pass): {passing}\n" +
-          "***********************************************\n") 
+    print(
+        "\n***********************************************\n"
+        + f"Appendix A Complete Match (Tests Pass): {passing}\n"
+        + "***********************************************\n"
+    )
+    return passing
 
 
 appendixA()
