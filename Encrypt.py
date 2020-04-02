@@ -4,6 +4,7 @@ from sBox import sBox, subBytes
 from shiftRows import shiftRows
 from mixColumns import mixColumns
 from util import xorHexStr, addRoundKey
+from pyfinite import ffield
 
 
 class Encrypt:
@@ -13,6 +14,7 @@ class Encrypt:
         self.state = FField(plainTxt)
         self.printAllStateChanges = printAllStateChanges
         self.currentRound = 0
+        self.f = ffield.FField(8, gen=0x11B, useLUT=0)
         print(
             "***********************************************\n"
             + f"Encrypting: {plainTxt}\n"
@@ -45,7 +47,7 @@ class Encrypt:
             if self.printAllStateChanges:
                 self.printChanges("shifted rows")
 
-            self.state = mixColumns(self.state)
+            self.state = mixColumns(self.state, self.f)
             if self.printAllStateChanges:
                 self.printChanges("mixed columns")
 
