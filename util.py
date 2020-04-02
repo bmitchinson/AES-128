@@ -20,3 +20,9 @@ def xorHexStr(one, two):
 
 def addRoundKey(state, roundKey):
     return FField(xorHexStr(state.getStateAsStr(), roundKey))
+
+
+def printBanner():
+    print(
+        "    _    _____ ____        _ ____  ___  \n   / \\  | ____/ ___|      / |___ \\( _ ) \n  / _ \\ |  _| \\___ \\ _____| | __) / _ \\ \n / ___ \\| |___ ___) |_____| |/ __/ (_) |\n/_/   \\_\\_____|____/      |_|_____\\___/ \n                                        \n- By Ben Mitchinson\n\nGitHub: bmitchinson\nhttps://mitchinson.dev"
+    )

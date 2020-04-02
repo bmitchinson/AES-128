@@ -1,7 +1,9 @@
 from keyExpansion import keyExpansion
+from util import printBanner
 
 
 def appendixA():
+    printBanner()
     passing = True
     print(
         "\n***********************************************\n"

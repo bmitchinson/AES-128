@@ -16,7 +16,7 @@ class Encrypt:
         print(
             "***********************************************\n"
             + f"Encrypting: {plainTxt}\n"
-            + f"Using Key : {key}\n"
+            + f"Using Key : {key}"
         )
         self.go()
 
@@ -28,13 +28,14 @@ class Encrypt:
 
         self.state = addRoundKey(self.state, roundKeys[self.currentRound])
         if self.printAllStateChanges:
-            self.printChanges("adding round 0 addRoundKey")
+            self.printChanges("addRoundKey for round 0")
         self.currentRound += 1
         while self.currentRound < 10:
             input(f"Press return to advance to round {self.currentRound}")
             if self.printAllStateChanges:
                 self.printRound()
-                self.printChanges(f"state at the start of round {self.currentRound}")
+                print(f"state at the start of {self.currentRound}:")
+                self.state.printStateAsGrid()
 
             self.state = subBytes(self.state)
             if self.printAllStateChanges:
@@ -50,7 +51,7 @@ class Encrypt:
 
             self.state = addRoundKey(self.state, roundKeys[self.currentRound])
             if self.printAllStateChanges:
-                self.printChanges(f"adding round key {self.currentRound}")
+                self.printChanges(f"addRoundKey {self.currentRound}")
 
             self.currentRound += 1
             # End of Core Loop (rounds 1-9)
