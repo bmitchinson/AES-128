@@ -3,13 +3,13 @@ from util import xorHexStr
 
 
 def keyExpansion(key):
-    printWordChange = False
+    printAllWordChanges = False
     words = [key[:8], key[8:16], key[16:24], key[24:32]]
     # will end up a 44 element array
     i = 4
-    if printWordChange:
-        for i in range(0, 4):
-            print(f"word {i}: {words[i]}")
+    if printAllWordChanges:
+        for j in range(0, 4):
+            print(f"i: -       word {j}:      {words[j]}")
 
     rcon = [
         "",
@@ -26,19 +26,19 @@ def keyExpansion(key):
     ]
     while i < 44:
         temp = words[i - 1]
-        if printWordChange:
-            print(f"i: {i}       temp:     {temp}")
-        if 4 % 4 == 0:
+        if printAllWordChanges:
+            print(f"i: {i}       temp:        {temp}")
+        if i % 4 == 0:
             rot = rotWord(temp)
             sub = subWord(rot)
             temp = xorHexStr(sub, rcon[i // 4])
-            if printWordChange:
-                print(f"i: {i} after rot:      {rot}")
-                print(f"i: {i} after sub:      {sub}")
-                print(f"i: {i} after rcon:     {temp}")
+            if printAllWordChanges:
+                print(f"i: {i} after rot:         {rot}")
+                print(f"i: {i} after sub:         {sub}")
+                print(f"i: {i} after rcon:        {temp}")
         tempWithFourAgo = xorHexStr(words[i - 4], temp)
-        if printWordChange:
-            print(f"i: {i} after fourAgo:  {tempWithFourAgo}")
+        if printAllWordChanges:
+            print(f"i: {i} after fourAgoXor:  {tempWithFourAgo}")
         words.append(tempWithFourAgo)
         i += 1
 
@@ -59,7 +59,7 @@ def subWord(word):
 def wordsToRoundKeys(words):
     roundKeys = []
     i = 0
-    while (i < 44):
+    while i < 44:
         roundKeys.append(words[i] + words[i + 1] + words[i + 2] + words[i + 3])
         i += 4
     return roundKeys

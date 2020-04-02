@@ -2,6 +2,12 @@ from keyExpansion import keyExpansion
 
 
 def appendixA():
+    passing = True
+    print("\n***********************************************\n" +
+          "Generating 11 roundKeys through keyExpansion.py\n\n" + 
+          "Each will be compared to the roundKey generated\n" + 
+          "in AppendixA of FIPS 197 for validation.        \n" +
+          "***********************************************\n")
     cipherKey = "2b7e151628aed2a6abf7158809cf4f3c"
     roundKeys = keyExpansion(cipherKey)
     appendixAKeys = [
@@ -19,9 +25,18 @@ def appendixA():
     ]
     i = 0
     for key in roundKeys:
-        print(f"Round {str(i)} Key: {key}")
+        if key is roundKeys[10]:
+            print(f"Round {str(i)} Key: {key}")
+        else:
+            print(f"Round {str(i)}  Key: {key}")
         print(f"Matches Appendix A: {key == appendixAKeys[i]}")
+        if key != appendixAKeys[i]:
+            passing = False
         i += 1
+
+    print("\n***********************************************\n" +
+         f"Appendix A Complete Match (Tests Pass): {passing}\n" +
+          "***********************************************\n") 
 
 
 appendixA()
