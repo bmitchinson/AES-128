@@ -47,7 +47,7 @@ class Encrypt:
 
             self.state = mixColumns(self.state)
             if self.printAllStateChanges:
-                self.printChanges("shifted rows")
+                self.printChanges("mixed columns")
 
             self.state = addRoundKey(self.state, roundKeys[self.currentRound])
             if self.printAllStateChanges:
