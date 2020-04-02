@@ -1,4 +1,5 @@
 from util import hexStrToInt
+from FField import FField
 
 sBoxTable = (
     0x63,
@@ -529,5 +530,11 @@ def invSBox(input):
     return "{0:#0{1}x}".format(lookupResultInt, 4)[2:]
 
 
-def subBytes(input):
-    return input
+def subBytes(state):
+    s = state.state
+    newStateStr = ""
+    for a in range(0, 4):
+        for b in range(0, 4):
+            newStateStr += sBox(s[b][a])
+
+    return FField(newStateStr)
