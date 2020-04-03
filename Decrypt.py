@@ -46,8 +46,9 @@ class Decrypt:
             )
 
         self.currentRound -= 1
+        flip = [9, 8, 7, 6, 5, 4, 3, 2, 1]
         while self.currentRound > 0:
-            printRound = (0 - self.currentRound) + self.currentRound
+            printRound = flip[self.currentRound - 1]
             if self.printMode != OFF:
                 if self.printMode == GRID:
                     input(f"Press return to advance to round {self.currentRound}")
