@@ -42,8 +42,7 @@ def keyExpansion(key):
         words.append(tempWithFourAgo)
         i += 1
 
-    roundKeys = wordsToRoundKeys(words)
-    return roundKeys
+    return words
 
 
 def rotWord(word):
@@ -54,12 +53,3 @@ def subWord(word):
     first = sBox(word[:2]) + sBox(word[2:4])
     second = sBox(word[4:6]) + sBox(word[6:8])
     return first + second
-
-
-def wordsToRoundKeys(words):
-    roundKeys = []
-    i = 0
-    while i < 44:
-        roundKeys.append(words[i] + words[i + 1] + words[i + 2] + words[i + 3])
-        i += 4
-    return roundKeys

@@ -29,17 +29,19 @@ class Encrypt:
         self.go()
 
     def go(self):
-        roundKeys = keyExpansion(self.key)
+        words = keyExpansion(self.key)
         if self.printMode != OFF:
             self.printChanges(
                 "initializing state",
                 f"round[0].input:     {self.state.getStateAsStr()}",
             )
 
-        self.state = addRoundKey(self.state, roundKeys[self.currentRound])
+        key = "".join(words[0:4])
+        self.state = addRoundKey(self.state, key)
         if self.printMode != OFF:
             self.printChanges(
-                "addRoundKey for round 0", f"round[0].k_sch:     {roundKeys[0]}"
+                f"addRoundKey for round {self.currentRound}",
+                f"round[{self.currentRound}].k_sch:     {key}",
             )
 
         self.currentRound += 1
@@ -74,11 +76,12 @@ class Encrypt:
                     f"round[{self.currentRound}].m_col:     {self.state.getStateAsStr()}",
                 )
 
-            self.state = addRoundKey(self.state, roundKeys[self.currentRound])
+            key = "".join(words[self.currentRound * 4 : (self.currentRound + 1) * 4])
+            self.state = addRoundKey(self.state, key)
             if self.printMode != OFF:
                 self.printChanges(
                     f"addRoundKey {self.currentRound}",
-                    f"round[{self.currentRound}].k_sch:     {roundKeys[self.currentRound]}",
+                    f"round[{self.currentRound}].k_sch:     {key}",
                 )
 
             self.currentRound += 1
@@ -99,11 +102,11 @@ class Encrypt:
                 "final shift rows",
                 f"round[{self.currentRound}].s_row:    {self.state.getStateAsStr()}",
             )
-        self.state = addRoundKey(self.state, roundKeys[self.currentRound])
+        key = "".join(words[40:44])
+        self.state = addRoundKey(self.state, key)
         if self.printMode != OFF:
             self.printChanges(
-                "final add round key",
-                f"round[{self.currentRound}].s_sch:    {roundKeys[10]}",
+                "final add round key", f"round[{self.currentRound}].s_sch:    {key}",
             )
         self.result = self.state.getStateAsStr()
 

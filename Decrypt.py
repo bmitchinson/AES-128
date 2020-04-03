@@ -18,7 +18,7 @@ class Decrypt:
         self.key = key
         self.state = FField(plainTxt)
         self.printMode = printMode
-        self.currentRound = 0
+        self.currentRound = 10
         self.f = ffield.FField(8, gen=0x11B, useLUT=0)
         print(
             "***********************************************\n"
@@ -29,21 +29,26 @@ class Decrypt:
         self.go()
 
     def go(self):
-        roundKeys = keyExpansion(self.key)
+        words = keyExpansion(self.key)
+        for i in range(11):
+            print(f"{words[i]},{words[i+1]},{words[i+2]},{words[i+3]}")
+
         if self.printMode != OFF:
             self.printChanges(
                 "initializing state",
-                f"round[0].iinput:     {self.state.getStateAsStr()}",
+                f"round[10].iinput:     {self.state.getStateAsStr()}",
             )
 
-        self.state = addRoundKey(self.state, roundKeys[self.currentRound])
+        key = "".join(words[40:44])
+        self.state = addRoundKey(self.state, key)
         if self.printMode != OFF:
             self.printChanges(
-                "addRoundKey for round 0", f"round[0].ik_sch:     {roundKeys[0]}"
+                f"addRoundKey for round {self.currentRound}",
+                f"round[{self.currentRound}].ik_sch:     {key}",
             )
 
-        self.currentRound += 1
-        while self.currentRound < 10:
+        self.currentRound -= 1
+        while self.currentRound > 0:
             if self.printMode != OFF:
                 if self.printMode == GRID:
                     input(f"Press return to advance to round {self.currentRound}")
@@ -67,18 +72,19 @@ class Decrypt:
                     f"round[{self.currentRound}].is_box:     {self.state.getStateAsStr()}",
                 )
 
-            self.state = addRoundKey(self.state, roundKeys[self.currentRound])
+            key = "".join(words[self.currentRound * 4 : (self.currentRound + 1) * 4])
+            self.state = addRoundKey(self.state, key)
             if self.printMode != OFF:
                 self.printChanges(
                     f"addRoundKey {self.currentRound}",
-                    f"round[{self.currentRound}].ik_sch:     {roundKeys[self.currentRound]}",
+                    f"round[{self.currentRound}].ik_sch:     {key}",
                 )
                 self.printChanges(
                     f"addRoundKey {self.currentRound}",
                     f"round[{self.currentRound}].ik_add:     {self.state.getStateAsStr()}",
                 )
 
-            self.currentRound += 1
+            self.currentRound -= 1
             # End of Core Loop (rounds 1-9)
 
         if self.printMode != OFF:
@@ -104,11 +110,11 @@ class Decrypt:
                 f"round[{self.currentRound}].is_box:    {self.state.getStateAsStr()}",
             )
 
-        self.state = addRoundKey(self.state, roundKeys[self.currentRound])
+        key = "".join(words[0:4])
+        self.state = addRoundKey(self.state, key)
         if self.printMode != OFF:
             self.printChanges(
-                "final add round key",
-                f"round[{self.currentRound}].ik_sch:    {roundKeys[10]}",
+                "final add round key", f"round[{self.currentRound}].ik_sch:    {key}",
             )
 
         self.result = self.state.getStateAsStr()
