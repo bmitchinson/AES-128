@@ -19,7 +19,7 @@ def appendixC():
         + "***********************************************"
     )
     demoPlainTxt = "69c4e0d86a7b0430d8cdb78070b4c55a"
-    demoKey = "13111d7fe3944a17f307a78b4d2b30c5"
+    demoKey = "000102030405060708090a0b0c0d0e0f"
     input("Press return to start: ")
     decrypt = Decrypt(demoPlainTxt, demoKey, printMode=CMODE)
 
