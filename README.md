@@ -18,7 +18,7 @@ Afterwards, you may load any of the following demos.
 
 ## 🔑 Demos (7 of them)
 You may run any of the following scripts after setup has been complete. Use `python {filename}` to start each one. 
-- or `python3 {filename}` if you're on osx and need to specify a version.
+- or `python3 {filename}` if you're on osx or running in the online sandbox.
 
 If you have not followed the pip install step in the above "Getting Started" section, the following demos will not function properlly.
 
