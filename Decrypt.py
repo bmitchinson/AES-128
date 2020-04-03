@@ -30,8 +30,6 @@ class Decrypt:
 
     def go(self):
         words = keyExpansion(self.key)
-        for i in range(11):
-            print(f"{words[i]},{words[i+1]},{words[i+2]},{words[i+3]}")
 
         if self.printMode != OFF:
             self.printChanges(
