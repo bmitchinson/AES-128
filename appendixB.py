@@ -2,6 +2,11 @@ from Encrypt import Encrypt
 from FField import FField
 from util import printBanner
 
+# Print Enums
+OFF = 0
+GRID = 1
+CMODE = 2
+
 
 def appendixB():
     printBanner()
@@ -20,9 +25,9 @@ def appendixB():
     demoKey = "2b7e151628aed2a6abf7158809cf4f3c"
     ans = input("Enter Y to see state changes,\nor return to just see the result: ")
     if ans.lower() == "y":
-        encrypt = Encrypt(demoPlainTxt, demoKey, printAllStateChanges=True)
+        encrypt = Encrypt(demoPlainTxt, demoKey, printMode=GRID)
     else:
-        encrypt = Encrypt(demoPlainTxt, demoKey, printAllStateChanges=False)
+        encrypt = Encrypt(demoPlainTxt, demoKey, printMode=OFF)
 
     result = encrypt.result
     appendixBResult = "3925841d02dc09fbdc118597196a0b32"
