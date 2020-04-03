@@ -8,7 +8,7 @@ from pyfinite import ffield
 
 
 class Encrypt:
-    def __init__(self, plainTxt, key, printAllStateChanges):
+    def __init__(self, plainTxt, key, printAllStateChanges=False):
         self.plainTxt = plainTxt
         self.key = key
         self.state = FField(plainTxt)
@@ -33,8 +33,8 @@ class Encrypt:
             self.printChanges("addRoundKey for round 0")
         self.currentRound += 1
         while self.currentRound < 10:
-            input(f"Press return to advance to round {self.currentRound}")
             if self.printAllStateChanges:
+                input(f"Press return to advance to round {self.currentRound}")
                 self.printRound()
                 print(f"state at the start of {self.currentRound}:")
                 self.state.printStateAsGrid()
@@ -58,7 +58,8 @@ class Encrypt:
             self.currentRound += 1
             # End of Core Loop (rounds 1-9)
 
-        input(f"Press return to advance to round {self.currentRound} (final round)")
+        if self.printAllStateChanges:
+            input(f"Press return to advance to round {self.currentRound} (final round)")
 
         self.state = subBytes(self.state)
         if self.printAllStateChanges:
@@ -69,13 +70,15 @@ class Encrypt:
         self.state = addRoundKey(self.state, roundKeys[self.currentRound])
         if self.printAllStateChanges:
             self.printChanges("final add round key")
-        if self.printAllStateChanges:
-            print(
-                "***********************************************\n"
-                + f"Final State / Cipher Output\n"
-                + "***********************************************"
-            )
-            self.state.printStateAsGrid()
+
+        print(
+            "***********************************************\n"
+            + f"Final State / Cipher Output\n"
+            + "***********************************************"
+        )
+        self.state.printStateAsGrid()
+
+        self.result = self.state.getStateAsStr()
 
     def printChanges(self, reason):
         print(f"state after {reason}:")
