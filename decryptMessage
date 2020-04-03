@@ -1,0 +1,8 @@
+sorry about that, I forgot the .py extension to the file, thus giving you a bad link.
+
+Here's what I meant to link: https://github.com/bmitchinson/AES-128/blob/master/decryptMessage.py
+Only difference is it has `.py` at the end.
+
+Hopefully this didn't cause too much confusion, 
+since everything about the organization of this project is listed
+in the root readme: https://github.com/bmitchinson/AES-128/blob/master/README.md
