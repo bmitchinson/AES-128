@@ -53,13 +53,6 @@ class Decrypt:
                     f"round[{self.currentRound}].istart:     {self.state.getStateAsStr()}",
                 )
 
-            self.state = invSubBytes(self.state)
-            if self.printMode != OFF:
-                self.printChanges(
-                    "subbed bytes using sBox",
-                    f"round[{self.currentRound}].is_box:     {self.state.getStateAsStr()}",
-                )
-
             self.state = invShiftRows(self.state)
             if self.printMode != OFF:
                 self.printChanges(
@@ -67,11 +60,11 @@ class Decrypt:
                     f"round[{self.currentRound}].is_row:     {self.state.getStateAsStr()}",
                 )
 
-            self.state = invMixColumns(self.state, self.f)
+            self.state = invSubBytes(self.state)
             if self.printMode != OFF:
                 self.printChanges(
-                    "mixed columns",
-                    f"round[{self.currentRound}].im_col:     {self.state.getStateAsStr()}",
+                    "subbed bytes using sBox",
+                    f"round[{self.currentRound}].is_box:     {self.state.getStateAsStr()}",
                 )
 
             self.state = addRoundKey(self.state, roundKeys[self.currentRound])
@@ -79,6 +72,10 @@ class Decrypt:
                 self.printChanges(
                     f"addRoundKey {self.currentRound}",
                     f"round[{self.currentRound}].ik_sch:     {roundKeys[self.currentRound]}",
+                )
+                self.printChanges(
+                    f"addRoundKey {self.currentRound}",
+                    f"round[{self.currentRound}].ik_add:     {self.state.getStateAsStr()}",
                 )
 
             self.currentRound += 1
@@ -93,18 +90,18 @@ class Decrypt:
                 f"round[{self.currentRound}].istart:    {self.state.getStateAsStr()}",
             )
 
-        self.state = invSubBytes(self.state)
-        if self.printMode != OFF:
-            self.printChanges(
-                "subbed bytes using sBox",
-                f"round[{self.currentRound}].is_box:    {self.state.getStateAsStr()}",
-            )
-
         self.state = invShiftRows(self.state)
         if self.printMode != OFF:
             self.printChanges(
                 "final shift rows",
                 f"round[{self.currentRound}].is_row:    {self.state.getStateAsStr()}",
+            )
+
+        self.state = invSubBytes(self.state)
+        if self.printMode != OFF:
+            self.printChanges(
+                "subbed bytes using sBox",
+                f"round[{self.currentRound}].is_box:    {self.state.getStateAsStr()}",
             )
 
         self.state = addRoundKey(self.state, roundKeys[self.currentRound])

@@ -13,8 +13,8 @@ def appendixC():
     print(
         "\n***********************************************\n"
         + "Using Encrypt.py to encrypt the input given\n"
-        + "in AppendixC. The state is tested against each\n"
-        + "state listed in AppendixC of FIPS197 for\n"
+        + "in AppendixC. The state is tested against the\n"
+        + "state in AppendixC of FIPS197 for\n"
         + "for validation.\n"
         + "***********************************************"
     )
