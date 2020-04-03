@@ -8,8 +8,8 @@
 
 ---
 
-## 💻 Getting Started
-To run the demos, you'll need a version of python 3 installed (I used 3.8). Required libraries are listed in [`requirements.txt`](https://github.com/bmitchinson/AES-128/blob/master/requirements.txt) and can be installed with `pip install -r requirements.txt` from the root directory of the project.
+## 💻 Getting Started - ([Skip this and use an Online Sandbox!](https://aes-128.bmitchinson.repl.run/))
+To run the demos, you'll need a version of python 3 installed] (I used 3.8). Required libraries are listed in [`requirements.txt`](https://github.com/bmitchinson/AES-128/blob/master/requirements.txt) and can be installed with `pip install -r requirements.txt` from the root directory of the project.
 - If you're on an osx system with multiple versions of python installed, note that you might need to specify `pip3 install -r requirements.txt`
 
 **If the following setup instructions do not work for your machine, feel free to test out each demo and explore the codebase in an online sandbox linked to this repository, [available here](https://repl.it/@bmitchinson/AES-128). No setup needed.**
@@ -47,5 +47,3 @@ If you have not followed the pip install step in the above "Getting Started" sec
 ### [Code Structure](https://github.com/bmitchinson/AES-128/wiki/Code-Structure)
 ### [AES Overview](https://github.com/bmitchinson/AES-128/wiki/AES-Overview)
 ### [Report that combines both into one document](https://github.com/bmitchinson/AES-128/wiki.pdf)
-
-
