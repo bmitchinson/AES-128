@@ -44,6 +44,4 @@ If you have not followed the pip install step in the above "Getting Started" sec
 - CMODE: (Default) Will show the state listed as a 32 character length string, as shown in AppendixC of FIPS 197. 
 
 ## 📝 Documentation
-### [Code Structure](https://github.com/bmitchinson/AES-128/wiki/Code-Structure)
-### [AES Overview](https://github.com/bmitchinson/AES-128/wiki/AES-Overview)
-### [Report that combines both into one document](https://github.com/bmitchinson/AES-128/wiki.pdf)
+### In-Depth documentation to fulfill the report requirement of the assignment is [available here](https://github.com/bmitchinson/AES-128/wiki)
