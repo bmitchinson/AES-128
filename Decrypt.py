@@ -82,6 +82,8 @@ class Decrypt:
                     f"round[{self.currentRound}].ik_add:     {self.state.getStateAsStr()}",
                 )
 
+            self.state = invMixColumns(self.state, self.f)
+
             self.currentRound -= 1
             # End of Core Loop (rounds 1-9)
 
