@@ -34,7 +34,7 @@ class Decrypt:
         if self.printMode != OFF:
             self.printChanges(
                 "initializing state",
-                f"round[10].iinput:     {self.state.getStateAsStr()}",
+                f"round[0].iinput:     {self.state.getStateAsStr()}",
             )
 
         key = "".join(words[40:44])
@@ -42,32 +42,33 @@ class Decrypt:
         if self.printMode != OFF:
             self.printChanges(
                 f"addRoundKey for round {self.currentRound}",
-                f"round[{self.currentRound}].ik_sch:     {key}",
+                f"round[0].ik_sch:     {key}",
             )
 
         self.currentRound -= 1
         while self.currentRound > 0:
+            printRound = (0 - self.currentRound) + self.currentRound
             if self.printMode != OFF:
                 if self.printMode == GRID:
                     input(f"Press return to advance to round {self.currentRound}")
                     print()
                 self.printChanges(
                     f"the start of {self.currentRound}",
-                    f"round[{self.currentRound}].istart:     {self.state.getStateAsStr()}",
+                    f"round[{printRound}].istart:     {self.state.getStateAsStr()}",
                 )
 
             self.state = invShiftRows(self.state)
             if self.printMode != OFF:
                 self.printChanges(
                     "shifted rows",
-                    f"round[{self.currentRound}].is_row:     {self.state.getStateAsStr()}",
+                    f"round[{printRound}].is_row:     {self.state.getStateAsStr()}",
                 )
 
             self.state = invSubBytes(self.state)
             if self.printMode != OFF:
                 self.printChanges(
                     "subbed bytes using sBox",
-                    f"round[{self.currentRound}].is_box:     {self.state.getStateAsStr()}",
+                    f"round[{printRound}].is_box:     {self.state.getStateAsStr()}",
                 )
 
             key = "".join(words[self.currentRound * 4 : (self.currentRound + 1) * 4])
@@ -75,11 +76,11 @@ class Decrypt:
             if self.printMode != OFF:
                 self.printChanges(
                     f"addRoundKey {self.currentRound}",
-                    f"round[{self.currentRound}].ik_sch:     {key}",
+                    f"round[{printRound}].ik_sch:     {key}",
                 )
                 self.printChanges(
                     f"addRoundKey {self.currentRound}",
-                    f"round[{self.currentRound}].ik_add:     {self.state.getStateAsStr()}",
+                    f"round[{printRound}].ik_add:     {self.state.getStateAsStr()}",
                 )
 
             self.state = invMixColumns(self.state, self.f)
@@ -93,28 +94,28 @@ class Decrypt:
                 print()
             self.printChanges(
                 f"the start of {self.currentRound}",
-                f"round[{self.currentRound}].istart:    {self.state.getStateAsStr()}",
+                f"round[10].istart:    {self.state.getStateAsStr()}",
             )
 
         self.state = invShiftRows(self.state)
         if self.printMode != OFF:
             self.printChanges(
                 "final shift rows",
-                f"round[{self.currentRound}].is_row:    {self.state.getStateAsStr()}",
+                f"round[10].is_row:    {self.state.getStateAsStr()}",
             )
 
         self.state = invSubBytes(self.state)
         if self.printMode != OFF:
             self.printChanges(
                 "subbed bytes using sBox",
-                f"round[{self.currentRound}].is_box:    {self.state.getStateAsStr()}",
+                f"round[10].is_box:    {self.state.getStateAsStr()}",
             )
 
         key = "".join(words[0:4])
         self.state = addRoundKey(self.state, key)
         if self.printMode != OFF:
             self.printChanges(
-                "final add round key", f"round[{self.currentRound}].ik_sch:    {key}",
+                "final add round key", f"round[10].ik_sch:    {key}",
             )
 
         self.result = self.state.getStateAsStr()
@@ -127,9 +128,7 @@ class Decrypt:
             )
             self.state.printStateAsGrid()
         if self.printMode == CMODE:
-            self.printChanges(
-                "", f"round[{self.currentRound}].ioutput:   {self.result}"
-            )
+            self.printChanges("", f"round[10].ioutput:   {self.result}")
         if self.printMode == OFF:
             print("Result: " + self.result)
 
