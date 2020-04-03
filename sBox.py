@@ -538,3 +538,13 @@ def subBytes(state):
             newStateStr += sBox(s[b][a])
 
     return FField(newStateStr)
+
+
+def invSubBytes(state):
+    s = state.state
+    newStateStr = ""
+    for a in range(0, 4):
+        for b in range(0, 4):
+            newStateStr += invSBox(s[b][a])
+
+    return FField(newStateStr)
