@@ -19,6 +19,7 @@ def xorHexStr(one, two):
 
 
 def addRoundKey(state, roundKey):
+    # breakpoint()
     return FField(xorHexStr(state.getStateAsStr(), roundKey))
 
 
