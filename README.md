@@ -8,7 +8,7 @@
 
 ---
 
-## 💻 Getting Started - ([Skip this and use an Online Sandbox!](https://aes-128.bmitchinson.repl.run/))
+## 💻 Getting Started - ([Skip this and use an Online Sandbox!](https://replit.com/@bmitchinson/AES-128))
 To run the demos, you'll need a version of python 3 installed] (I used 3.8). Required libraries are listed in [`requirements.txt`](https://github.com/bmitchinson/AES-128/blob/master/requirements.txt) and can be installed with `pip install -r requirements.txt` from the root directory of the project.
 - If you're on an osx system with multiple versions of python installed, note that you might need to specify `pip3 install -r requirements.txt`
 
